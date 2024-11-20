@@ -7,7 +7,7 @@ const orderNumbers = [
 ]; // Example order numbers
 
 const filteredOrderNumbers = orderNumbers.filter(orderNumber => {
-  return successOrders.some(order => order === orderNumber);
+  return !successOrders.some(order => order === orderNumber);
 });
 console.log("NUMBER OF ORDER NUMBERS:", orderNumbers?.length)
 console.log("NUMBER OF FILTERED ORDER NUMBERS:", filteredOrderNumbers?.length)
