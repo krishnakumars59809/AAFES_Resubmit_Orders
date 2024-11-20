@@ -12,8 +12,10 @@ const filteredOrderNumbers = orderNumbers.filter(orderNumber => {
 console.log("NUMBER OF ORDER NUMBERS:", orderNumbers?.length)
 console.log("NUMBER OF FILTERED ORDER NUMBERS:", filteredOrderNumbers?.length)
 
+const isTest = true
+
 if (filteredOrderNumbers?.length > 0) {
-  execute(filteredOrderNumbers)
+  execute(filteredOrderNumbers, isTest)
 } else {
   console.log("PLEASE TRY NEW ORDERS!!!!")
 }

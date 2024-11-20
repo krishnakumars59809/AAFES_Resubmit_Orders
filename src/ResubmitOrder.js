@@ -62,7 +62,7 @@ const getResubmitOrders = async (orderNumbers) => {
 
 
 // Function to update the state of the orders to "Open"
-const changeOrderState = async (orderNumbers) => {
+const changeOrderState = async (orderNumbers, isTest) => {
     const { successOrders, failedOrders } = await getResubmitOrders(orderNumbers);
     console.log("NUMBER OF PROCESSING ORDER IDS:", successOrders?.length);
     console.log("NUMBER OF PROCESSING FAILED ORDER IDS:", failedOrders?.length);
@@ -96,7 +96,9 @@ const changeOrderState = async (orderNumbers) => {
             };
 
             try {
-                await axios.request(config);
+                if (!isTest) {
+                    await axios.request(config);
+                }
                 updateSuccess.push(order.orderNumber); // If successful, push the order number to success array
             } catch (error) {
                 // If the request fails, log the error and push the order number to failed array
@@ -134,10 +136,10 @@ const changeOrderState = async (orderNumbers) => {
 
 
 // Main function to execute the state change logic
-export const execute = async (orderNumbers) => {
+export const execute = async (orderNumbers, isTest) => {
     const startTime = Date.now(); // Capture start time for the entire `changeOrderState` process
     console.log("Starting changeOrderState.....");
-    console.log("RESUBMIT ORDERS", await changeOrderState(orderNumbers)); // Call changeOrderState and log the result
+    console.log("RESUBMIT ORDERS", await changeOrderState(orderNumbers, isTest)); // Call changeOrderState and log the result
     const endTime = Date.now(); // Capture end time after the function has finished
     console.log("Total Execution Time for changeOrderState:", `${endTime - startTime}ms`)
     console.log(`Finished.`); // Log total execution time
