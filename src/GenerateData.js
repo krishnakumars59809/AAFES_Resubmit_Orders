@@ -1,4 +1,4 @@
-import { data } from "./Data.js";
+import data from "./src/Data.js";
 
 function splitArrayIntoChunks(inputArray, chunkSize = 100) {
     if (!Array.isArray(inputArray)) {
